@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản Phẩm</title>
+    <style>
+      
+    </style>
+</head>
+<link rel="stylesheet" href="../css/style3.css">
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Quay lại trang chủ</a>
+        <h1>Danh Sách Sản Phẩm</h1>
+
+        <div class="product-grid" id="productGrid">
+            <!-- Products will be generated here -->
+        </div>
+    </div>
+
+    <!-- Modal Form -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h2 id="modalTitle">Chi Tiết Sản Phẩm</h2>
+            </div>
+            <form id="productForm">
+                <div class="form-group">
+                    <label for="productName">Tên Sản Phẩm:</label>
+                    <input type="text" id="productName" name="productName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="productPrice">Giá (VND):</label>
+                    <input type="text" id="productPrice" name="productPrice" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="productBrand">Thương Hiệu:</label>
+                    <input type="text" id="productBrand" name="productBrand">
+                </div>
+
+                <div class="form-group">
+                    <label for="productDescription">Mô Tả:</label>
+                    <textarea id="productDescription" name="productDescription"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="productStatus">Trạng Thái:</label>
+                    <select id="productStatus" name="productStatus">
+                        <option value="">-- Chọn Trạng Thái --</option>
+                        <option value="Mới">Mới</option>
+                        <option value="Có Sẵn">Có Sẵn</option>
+                        <option value="Hết Hàng">Hết Hàng</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="productImage">Link Ảnh (Src):</label>
+                    <input type="text" id="productImage" name="productImage" placeholder="Nhập đường dẫn ảnh">
+                </div>
+
+                <div class="form-buttons">
+                    <button type="button" class="btn btn-cancel" onclick="closeModal()">Hủy</button>
+                    <button type="submit" class="btn btn-submit">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Sample product data
+        const products = [
+            {
+                id: 1,
+                name: 'ADV350',
+                price: '165.990.000',
+                brand: 'Honda',
+                description: 'Xe Adventure tầm trung với hiệu suất cao và độ bền vượt trội',
+                status: 'Mới',
+                image: '../assets/images/sp1.png'
+            },
+            {
+                id: 2,
+                name: 'SH350i',
+                price: '151.190.000',
+                brand: 'Honda',
+                description: 'Scooter cao cấp với công nghệ tiên tiến',
+                status: 'Có Sẵn',
+                image: '../assets/images/sp2.png'
+            },
+            {
+                id: 3,
+                name: 'Sh mode 125',
+                price: '57.132.000',
+                brand: 'Honda',
+                description: 'Scooter phổ thông, tiết kiệm xăng',
+                status: 'Có Sẵn',
+                image: '../assets/images/sp3.png'
+            },
+            {
+                id: 4,
+                name: 'Vario 160',
+                price: '51.990.000',
+                brand: 'Honda',
+                description: 'Scooter tự động với thiết kế hiện đại',
+                status: 'Mới',
+                image: '../assets/images/sp4.png'
+            },
+            {
+                id: 5,
+                name: 'Air Blade 160/125',
+                price: '42.208.363',
+                brand: 'Honda',
+                description: 'Xe sport phổ biến, hiệu suất ổn định',
+                status: 'Có Sẵn',
+                image: '../assets/images/sp5.png'
+            },
+            {
+                id: 6,
+                name: 'Winner R',
+                price: '46.735.637',
+                brand: 'Honda',
+                description: 'Xe côn tay thể thao, thiết kế mạnh mẽ',
+                status: 'Có Sẵn',
+                image: '../assets/images/sp6.png'
+            },
+            {
+                id: 7,
+                name: 'Vision',
+                price: '31.310.182',
+                brand: 'Honda',
+                description: 'Xe tay ga cơ bản, giá hợp lý',
+                status: 'Mới',
+                image: '../assets/images/sp7.jpg'
+            },
+            {
+                id: 8,
+                name: 'LEAD ABS',
+                price: '39.557.455',
+                brand: 'Honda',
+                description: 'Xe tay ga an toàn với hệ thống ABS',
+                status: 'Có Sẵn',
+                image: '../assets/images/sp8.png'
+            }
+        ];
+
+        // Render products on page load
+        function renderProducts() {
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = '';
+
+            products.forEach(product => {
+                const badge = product.status ? `<div class="badge">${product.status}</div>` : '';
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <div class="product-image"><img src="${product.image}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                    <div class="product-info">
+                        ${badge}
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-price">Giá: ${product.price} VND</div>
+                    </div>
+                `;
+                productCard.addEventListener('click', () => openModal(product));
+                productGrid.appendChild(productCard);
+            });
+        }
+
+        // Open modal and populate form with product data
+        function openModal(product) {
+            document.getElementById('modalTitle').textContent = `Chi Tiết Sản Phẩm - ${product.name}`;
+            document.getElementById('productName').value = product.name;
+            document.getElementById('productPrice').value = product.price;
+            document.getElementById('productBrand').value = product.brand;
+            document.getElementById('productDescription').value = product.description;
+            document.getElementById('productStatus').value = product.status;
+            document.getElementById('productImage').value = product.image;
+            
+            document.getElementById('productModal').classList.add('show');
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('productModal').classList.remove('show');
+            document.getElementById('productForm').reset();
+        }
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', (event) => {
+            const modal = document.getElementById('productModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('productForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Dữ liệu đã được lưu:\n' + 
+                  'Tên: ' + document.getElementById('productName').value + '\n' +
+                  'Giá: ' + document.getElementById('productPrice').value + '\n' +
+                  'Thương hiệu: ' + document.getElementById('productBrand').value + '\n' +
+                  'Link ảnh: ' + document.getElementById('productImage').value);
+            closeModal();
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', renderProducts);
+    </script>
+</body>
+
+</html>
