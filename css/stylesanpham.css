@@ -1,0 +1,97 @@
+/* stylesanpham.css - Styles for sanphamv2 page */
+
+:root{
+  --bg:#ffffff; /* predominantly white background */
+  --card:#ffffff;
+  --muted:#6b7280;
+  --brand:#16a34a; /* fresh green */
+  --brand-dark:#0f6b34;
+  --accent:var(--brand);
+  --accent-strong:var(--brand-dark);
+  --danger:#ef4444;
+  --shadow: 0 6px 18px rgba(16,24,40,0.06);
+  --radius:8px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;background:var(--bg);color:#07221b}
+
+/* Page container */
+.spv2-container{max-width:1200px;margin:32px auto;padding:0 16px}
+
+/* Header / toolbar */
+.spv2-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.spv2-title{font-size:1.5rem;font-weight:600}
+.spv2-actions{display:flex;gap:10px;align-items:center}
+.spv2-btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:6px;border:none;cursor:pointer;box-shadow:none}
+.spv2-btn.secondary{background:#fff;color:var(--accent);border:1px solid rgba(14,165,164,0.12)}
+
+/* Layout: filters + products */
+.spv2-grid{display:grid;grid-template-columns:260px 1fr;gap:20px}
+
+/* Filters sidebar */
+.spv2-filters{background:var(--card);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow)}
+.spv2-filters h4{margin:0 0 12px 0;font-size:0.95rem}
+.spv2-filter-group{margin-bottom:12px}
+.spv2-filter-group label{display:block;font-size:0.85rem;color:var(--muted);margin-bottom:6px}
+.spv2-input, .spv2-select{width:100%;padding:8px;border:1px solid #e6e9ef;border-radius:6px}
+
+/* Product list */
+.spv2-products{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+
+/* Product card */
+.sp-card{background:var(--card);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .15s ease,box-shadow .15s ease}
+.sp-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(16,24,40,0.12)}
+.sp-card .img-wrap{width:100%;padding-top:75%;position:relative;overflow:hidden;background:linear-gradient(180deg,#f8fafc,#fff)}
+.sp-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sp-card .card-body{padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.sp-card .title{font-size:0.98rem;font-weight:600;color:#07123b;line-height:1.2}
+.sp-card .desc{font-size:0.85rem;color:var(--muted);min-height:36px}
+.sp-card .price-row{display:flex;align-items:center;justify-content:space-between}
+.sp-card .price{font-weight:700;color:var(--accent-strong)}
+.sp-card .old-price{font-size:0.85rem;color:var(--muted);text-decoration:line-through;margin-left:8px}
+
+.sp-card .meta{display:flex;gap:8px;align-items:center;font-size:0.85rem;color:var(--muted)}
+.sp-card .actions{display:flex;gap:8px;margin-top:8px}
+.sp-card .actions button{flex:1;padding:8px;border-radius:8px;border:1px solid rgba(14,165,164,0.08);background:#fff;cursor:pointer}
+.sp-card .actions button.add{background:var(--accent);color:#fff;border:none}
+
+/* Badge / sale */
+.sp-badge{position:absolute;top:10px;left:10px;background:var(--danger);color:#fff;padding:6px 8px;border-radius:6px;font-size:0.75rem;font-weight:700}
+
+/* Quick view overlay */
+.sp-quick{position:relative}
+.sp-quick .quick-btn{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,0.6);color:#fff;padding:6px 8px;border-radius:6px;font-size:0.82rem;border:none;cursor:pointer}
+
+/* Pagination */
+.spv2-pagination{display:flex;gap:8px;justify-content:center;margin:22px 0}
+.spv2-pagination button{padding:8px 12px;border-radius:8px;border:1px solid #e6e9ef;background:#fff;cursor:pointer}
+.spv2-pagination button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* Empty / placeholder */
+.sp-empty{padding:40px;text-align:center;color:var(--muted);background:transparent}
+
+/* Responsive */
+@media (max-width:1024px){
+  .spv2-grid{grid-template-columns:220px 1fr}
+  .spv2-products{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:740px){
+  .spv2-grid{grid-template-columns:1fr}
+  .spv2-filters{order:2}
+  .spv2-products{grid-template-columns:repeat(2,1fr)}
+  .spv2-toolbar{flex-direction:column;align-items:stretch;gap:10px}
+}
+@media (max-width:420px){
+  .spv2-products{grid-template-columns:1fr}
+  .sp-card .card-body{padding:10px}
+}
+
+/* Utilities */
+.text-muted{color:var(--muted)}
+.flex{display:flex}
+.center{display:flex;align-items:center;justify-content:center}
+
+/* small animation for loading images */
+.img-skeleton{background:linear-gradient(90deg,#f2f5f8,#eef2f6,#f2f5f8);background-size:200% 100%;animation:shimmer 1.2s linear infinite}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
