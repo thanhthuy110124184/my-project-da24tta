@@ -72,9 +72,13 @@ function renderProduct(id) {
 document.addEventListener('DOMContentLoaded', () => {
 	updateCartCount();
 	const idParam = getQueryParam('id');
-	const id = idParam ? parseInt(idParam, 10) : 0;
-	if (Number.isNaN(id)) {
-		renderProduct(0);
+	if (!idParam) {
+		document.querySelector('.product-detail').textContent = 'Vui lòng chọn sản phẩm';
+		return;
+	}
+	const id = parseInt(idParam, 10);
+	if (Number.isNaN(id) || id < 0 || id >= allProduct.length) {
+		document.querySelector('.product-detail').textContent = 'Sản phẩm không tồn tại';
 	} else {
 		renderProduct(id);
 	}

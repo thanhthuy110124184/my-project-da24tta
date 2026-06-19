@@ -8,50 +8,47 @@
     <link rel="stylesheet" href="../css/stylesanpham.css">
 </head>
 <body>
-</body>
-</html>
+    <div class="spv2-container">
 
-        <div class="spv2-container">
-
-            <div class="spv2-toolbar">
-                <div class="spv2-title">Danh sách sản phẩm</div>
-                <div class="spv2-actions">
-                    <button class="spv2-btn">Tất cả</button>
-                    <button class="spv2-btn secondary">Bộ lọc</button>
-                </div>
+        <div class="spv2-toolbar">
+            <div class="spv2-title">Danh sách sản phẩm</div>
+            <div class="spv2-actions">
+                <button class="spv2-btn">Tất cả</button>
+                <button class="spv2-btn secondary">Bộ lọc</button>
             </div>
-
-            <div class="spv2-grid">
-                <aside class="spv2-filters">
-                    <h4>Bộ lọc</h4>
-                    <div class="spv2-filter-group">
-                        <label>Danh mục</label>
-                        <select class="spv2-select">
-                            <option>Tất cả</option>
-                        </select>
-                    </div>
-                </aside>
-
-                <main>
-                    <div class="spv2-products" id="product-list"></div>
-                    <div class="spv2-pagination">
-                        <button>1</button>
-                        <button>2</button>
-                        <button>3</button>
-                    </div>
-                </main>
-            </div>
-
         </div>
 
-        <script src="../js/data.js"></script>
-        <script src="../js/lib.js"></script>
+        <div class="spv2-grid">
+            <aside class="spv2-filters">
+                <h4>Bộ lọc</h4>
+                <div class="spv2-filter-group">
+                    <label>Danh mục</label>
+                    <select class="spv2-select">
+                        <option>Tất cả</option>
+                    </select>
+                </div>
+            </aside>
 
-        <script>
-            allProduct.forEach(product =>{
-                createItemV2(product);
-            });
-        </script>
+            <main>
+                <div class="spv2-products" id="product-list"></div>
+                <div class="spv2-pagination">
+                    <button>1</button>
+                    <button>2</button>
+                    <button>3</button>
+                </div>
+            </main>
+        </div>
 
-    </body>
+    </div>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/lib.js"></script>
+    <script src="../js/chitiet.js"></script>
+
+    <script>
+        allProduct.forEach((product, index) => {
+            createItemV2(product, index);
+        });
+    </script>
+</body>
 </html>

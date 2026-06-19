@@ -5,7 +5,10 @@ const allProduct = [
         description: "Cấp ẩm sâu, phục hồi hàng rào bảo vệ da",
         tag: "Chăm sóc da",
         image: "../assets/images/cerave-moisturizer.png",
-        linkProduct: "#"
+        stock: "Có sẵn",
+        isNew: true,
+        rating: 4.5,
+        reviews: 128
     },
 
     {
@@ -14,7 +17,10 @@ const allProduct = [
         description: "Làm sạch dịu nhẹ, phù hợp da nhạy cảm",
         tag: "Chăm sóc da",
         image: "../assets/images/cetaphil-cleanser.png",
-        linkProduct: "#"
+        stock: "Có sẵn",
+        isNew: false,
+        rating: 4.8,
+        reviews: 256
     },
 
     {
@@ -23,7 +29,10 @@ const allProduct = [
         description: "Làm sáng da, hỗ trợ giảm thâm nám",
         tag: "Serum",
         image: "../assets/images/vitamin-c-serum.png",
-        linkProduct: "#"
+        stock: "Hết hàng",
+        isNew: true,
+        rating: 4.7,
+        reviews: 89
     },
 
     {
@@ -32,7 +41,10 @@ const allProduct = [
         description: "Bảo vệ da khỏi tia UV với SPF50+ PA++++",
         tag: "Chống nắng",
         image: "../assets/images/anessa-sunscreen.jpg",
-        linkProduct: "#"
+        stock: "Còn 3 sản phẩm",
+        isNew: false,
+        rating: 4.6,
+        reviews: 145
     },
 
     {
@@ -41,7 +53,10 @@ const allProduct = [
         description: "Màu son bền đẹp suốt ngày dài",
         tag: "Trang điểm",
         image: "../assets/images/lipstick.png",
-        linkProduct: "#"
+        stock: "Có sẵn",
+        isNew: false,
+        rating: 4.4,
+        reviews: 203
     },
 
     {
@@ -50,7 +65,10 @@ const allProduct = [
         description: "Lớp nền mỏng nhẹ, che phủ tự nhiên",
         tag: "Trang điểm",
         image: "../assets/images/laneige-cushion.png",
-        linkProduct: "#"
+        stock: "Có sẵn",
+        isNew: true,
+        rating: 4.9,
+        reviews: 312
     },
 
     {
@@ -59,7 +77,10 @@ const allProduct = [
         description: "Làm sạch lớp trang điểm và bụi bẩn hiệu quả",
         tag: "Làm sạch",
         image: "../assets/images/bioderma-micellar.png",
-        linkProduct: "#"
+        stock: "Có sẵn",
+        isNew: false,
+        rating: 4.3,
+        reviews: 98
     },
 
     {
@@ -68,6 +89,9 @@ const allProduct = [
         description: "Cấp nước và phục hồi da qua đêm",
         tag: "Chăm sóc da",
         image: "../assets/images/laneige-sleeping-mask.png",
-        linkProduct: "#"
+        stock: "Còn 5 sản phẩm",
+        isNew: true,
+        rating: 4.7,
+        reviews: 167
     },
 ];

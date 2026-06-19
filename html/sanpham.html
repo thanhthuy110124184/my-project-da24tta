@@ -6,7 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sản Phẩm</title>
     <style>
-      
+        .container{max-width:1100px;margin:20px auto;padding:0 16px}
+        .back-link{display:inline-block;margin-bottom:12px;color:#333;text-decoration:none}
+        .product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+        .product-card{border:1px solid #e0e0e0;padding:8px;border-radius:6px;cursor:pointer;position:relative;overflow:hidden;background:#fff}
+        .product-image{height:160px;background:#f8f8f8;display:flex;align-items:center;justify-content:center}
+        .product-info{padding:8px}
+        .product-name{font-weight:600;margin-bottom:6px}
+        .product-price{color:#2c7a7b}
+        .badge{position:absolute;right:8px;top:8px;background:#ff6b6b;color:#fff;padding:4px 8px;border-radius:4px;font-size:12px}
+
+        /* Modal tweaks */
+        .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);align-items:center;justify-content:center;z-index:1000}
+        .modal.show{display:flex}
+        .modal-content{background:#fff;padding:18px;border-radius:8px;max-width:860px;width:92%;position:relative}
+        .close-btn{position:absolute;right:12px;top:8px;background:none;border:0;font-size:26px;cursor:pointer}
+
+        .detail-container{display:flex;gap:18px;align-items:flex-start}
+        .detail-image{flex:0 0 320px;height:220px;background:#f2f2f2;border-radius:6px;overflow:hidden}
+        .detail-image img{width:100%;height:100%;object-fit:cover}
+        .detail-info{flex:1}
+        .detail-info h3{margin:0 0 8px}
+        .detail-info p{margin:6px 0;color:#444}
+
+        .form-buttons{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+        .hidden{display:none}
     </style>
 </head>
 <link rel="stylesheet" href="../css/style3.css">
@@ -27,7 +51,23 @@
             <div class="modal-header">
                 <h2 id="modalTitle">Chi Tiết Sản Phẩm</h2>
             </div>
-            <form id="productForm">
+                <!-- Read-only detail view -->
+                <div id="productDetail" class="detail-container">
+                    <div class="detail-image"><img id="productDetailImage" src="" alt=""></div>
+                    <div class="detail-info">
+                        <h3 id="productDetailName"></h3>
+                        <p id="productDetailPrice"></p>
+                        <p><strong>Thương hiệu:</strong> <span id="productDetailBrand"></span></p>
+                        <p><strong>Trạng thái:</strong> <span id="productDetailStatus"></span></p>
+                        <p id="productDetailDescription"></p>
+                        <div style="margin-top:12px">
+                            <button type="button" class="btn" onclick="showEdit()">Chỉnh sửa</button>
+                            <button type="button" class="btn btn-cancel" onclick="closeModal()">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="productForm" class="hidden">
                 <div class="form-group">
                     <label for="productName">Tên Sản Phẩm:</label>
                     <input type="text" id="productName" name="productName" required>
@@ -173,14 +213,40 @@
         // Open modal and populate form with product data
         function openModal(product) {
             document.getElementById('modalTitle').textContent = `Chi Tiết Sản Phẩm - ${product.name}`;
+
+            // populate detail view
+            document.getElementById('productDetailImage').src = product.image;
+            document.getElementById('productDetailImage').alt = product.name;
+            document.getElementById('productDetailName').textContent = product.name;
+            document.getElementById('productDetailPrice').textContent = `Giá: ${product.price} VND`;
+            document.getElementById('productDetailBrand').textContent = product.brand || '-';
+            document.getElementById('productDetailStatus').textContent = product.status || '-';
+            document.getElementById('productDetailDescription').textContent = product.description || '';
+
+            // populate form fields (for edit)
             document.getElementById('productName').value = product.name;
             document.getElementById('productPrice').value = product.price;
             document.getElementById('productBrand').value = product.brand;
             document.getElementById('productDescription').value = product.description;
             document.getElementById('productStatus').value = product.status;
             document.getElementById('productImage').value = product.image;
-            
+
+            // show modal with detail view visible and form hidden
+            document.getElementById('productDetail').style.display = 'flex';
+            document.getElementById('productForm').classList.add('hidden');
             document.getElementById('productModal').classList.add('show');
+        }
+
+        // Show edit form inside modal
+        function showEdit() {
+            document.getElementById('productDetail').style.display = 'none';
+            document.getElementById('productForm').classList.remove('hidden');
+        }
+
+        // Show detail view (if needed)
+        function showDetail() {
+            document.getElementById('productDetail').style.display = 'flex';
+            document.getElementById('productForm').classList.add('hidden');
         }
 
         // Close modal
